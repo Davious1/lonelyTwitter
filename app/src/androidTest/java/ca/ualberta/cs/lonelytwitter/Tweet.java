@@ -2,7 +2,7 @@ package ca.ualberta.cs.lonelytwitter;
 
 import java.util.Date;
 
-public abstract class Tweet implements Tweetable {
+public abstract class Tweet {
     private Date date;
     private String message;
     private static final Integer MAX_CHARS = 140;
