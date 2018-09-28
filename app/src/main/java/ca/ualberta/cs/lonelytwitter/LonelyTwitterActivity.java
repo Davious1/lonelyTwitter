@@ -19,13 +19,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 public class LonelyTwitterActivity extends Activity {
 
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
 
-	private ArrayList<NormalTweet> tweetList;
+	private arrayList<Tweet> tweets = new ArrayList<~>();
+	private ArrayAdapter<Tweet> adapter;
 //need to resolve adapter and tweet =================================================================
 
 	
@@ -61,8 +65,7 @@ public class LonelyTwitterActivity extends Activity {
 
 		super.onStart();
 		loadFromFile();
-		adapter = new ArrayAdapter<NormalTweet> ( this,
-				R.layout.list_item, tweetList);
+		adapter = new ArrayAdapter<Tweet> ( this, R.layout.list_item, tweetList);
 		oldTweetsList.setAdapter(adapter);
 	}
 
@@ -73,7 +76,7 @@ public class LonelyTwitterActivity extends Activity {
 			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 
 			Gson gson = new Gson();//Library ti save objects
-			Type listType = new TypeToken<ArrayList<NormalTweet>>(){}.getType();
+			Type listType = new TypeToken<ArrayList<NormalTweet>>() {}.getType();
 			tweetList = gson.fromJson(in, listType);
 
 
@@ -95,7 +98,7 @@ public class LonelyTwitterActivity extends Activity {
 
 			FileOutputStream fos = openFileOutput(FILENAME,
 					Context.MODE_PRIVATE);
-
+			OutputStreamWriter writer = new OutputStreamWriter(fos);
 			//BufferedWriter out = new BufferedWriter (new OutputStreamWriter(fos));
 
 			Gson gson = new Gson();//Library ti save objects
